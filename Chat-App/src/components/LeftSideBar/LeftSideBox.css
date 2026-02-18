@@ -96,12 +96,16 @@
     top: 100%;
     right: 0;
     width: 130px;
-    padding: 20px;
+    padding: 10px;
     border-radius: 5px;
     background-color: white;
     color: black;
-    display: none;
+    
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.3s ease;
 }
+
 .sub-menu hr{
     border: none;
     height: 1px;
@@ -114,7 +118,8 @@
 }
 
 .menu:hover .sub-menu{
-    display: block;
+    visibility: visible;
+    opacity: 1;
 }
 
 /* Hide left sidebar on mobile when user selected */

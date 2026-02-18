@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './RightSideBar.css'
 import assets, { imagesDummyData } from '../../assets/assets'
+import { useNavigate } from 'react-router-dom'
+import { Authcontext } from '../../../context/AuthContext.jsx'
 
 const RightSideBar = ({selectedUser}) => {
+  const navigate = useNavigate();
+  const { logout } = useContext(Authcontext)
+
   return selectedUser && (
     <div className={`rs ${selectedUser ? "max-md:hidden" : ""}`}>
       <div className="rs-profile">
@@ -21,7 +26,7 @@ const RightSideBar = ({selectedUser}) => {
           ))}
         </div>
       </div>
-      <button>Logout</button>
+      <button onClick={() => { logout(); navigate('/login'); }}>Logout</button>
     </div>
   )
 }

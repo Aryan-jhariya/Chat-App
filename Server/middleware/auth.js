@@ -1,5 +1,25 @@
 import jwt from "jsonwebtoken";
+import User from "../models/User.js";
 
+//Middle warer to protect routes
+export const proTectRoute = async (req, res, next)=>{
+  try {
+    const token = req.headers.token;
+
+    const decoded = jwt.verify(token, process.env.JWT_SECRET)
+    
+    const user = await User.findById(decoded.userId).select("-password");
+
+    if(!user) return res.json({success: false, message: "User not found"});
+
+    req.user = user;
+    next();
+
+  } catch (error) {
+    console.log(error.message)
+    res.json({success: false, message: error.message});
+  }
+}
 
 //Middleware to control Routes
 export const protectRoute = async (req, res, next) => {
@@ -11,7 +31,12 @@ export const protectRoute = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded;
+
+    // Attach full user document (without password) for downstream handlers
+    const user = await User.findById(decoded.userId).select("-password");
+    if (!user) return res.status(401).json({ message: "User not found" });
+
+    req.user = user;
 
     next();
   } catch (error) {

@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import './LeftSideBox.css'
 import assets, { userDummyData } from '../../assets/assets.js'
 import { useNavigate } from 'react-router-dom';
+import { Authcontext } from '../../../context/AuthContext.jsx'
 
 const LeftSideBox = ({ selectedUser, setSelectedUser }) => {
     const navigate = useNavigate();
+    const { logout } = useContext(Authcontext)
     return (
         <div className={`ls ${selectedUser ? "hide-mobile" : ""}`}>
 
@@ -17,7 +19,7 @@ const LeftSideBox = ({ selectedUser, setSelectedUser }) => {
                         <div className="sub-menu">
                             <p onClick={() => navigate('/profile')}>Edit Profile</p>
                             <hr />
-                            <p>Logout</p>
+                            <p onClick={() => { logout(); navigate('/login'); }}>Logout</p>
                         </div>
                     </div>
                 </div>

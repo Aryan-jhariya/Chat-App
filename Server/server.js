@@ -11,13 +11,16 @@ import { Server } from "socket.io";
 const app = express();
 const server = http.createServer(app)
 
+
 //Initailize socket.io server
 export const io = new Server(server, {
     cors: {origin: "*"}
 })
 
+
 //Store online users
 export const userSocketMap ={}; // {userId: socketId}
+
 
 //Socket.io connection handler
 io.on("connection", (socket) => {

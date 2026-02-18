@@ -1,4 +1,3 @@
-// import React,{useContext, useState} from 'react'
 import './Login.css'
 import assets from '../../assets/assets'
 import { useContext, useState } from 'react'
@@ -17,16 +16,14 @@ const Login = () => {
 
   const onSubmitHandler = (event) => {
     event.preventDefault();
+
     if (currState === "Sign Up" && !isDataSubmitted) {
       setIsDataSubmitted(true)
       // signup(userName,email,password);
       return;
     }
     login(
-      currState === "Sign Up" ? "signup" : "login",
-      currState === "Sign Up"
-        ? { userName, email, password }
-        : { email, password }
+      currState === "Sign Up" ? "signup" : "login", { userName, email, password, bio }
     );
   };
 
@@ -45,8 +42,8 @@ const Login = () => {
           </>
         )}
 
-        {currState === "Sign Up" && isDataSubmitted &&(
-          <textarea onChange={(e)=> setBio(e.target.value)} value={bio} rows={4} className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500' placeholder='provide a short Bio..' required></textarea>
+        {currState === "Sign Up" && isDataSubmitted && (
+          <textarea onChange={(e) => setBio(e.target.value)} value={bio} rows={4} className='p-2 border border-gray-500 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500' placeholder='provide a short Bio..' required></textarea>
         )}
 
         <button type="submit">
@@ -60,8 +57,17 @@ const Login = () => {
         <div className="log-forgot">
           {
             currState === "Sign Up"
-              ? <p className="login-toggle">Already have an account <span onClick={() => {setCurrState("Login"); setIsDataSubmitted(false) }}>Login here</span></p>
-              : <p className="login-toggle">Create an account <span onClick={() => setCurrState("Sign Up")}>Click here</span></p>
+              ? <p className="login-toggle">Already have an account <span onClick={() => { setCurrState("Login"); setIsDataSubmitted(false) }}>Login here</span></p>
+              : <p className="login-toggle">
+                Create an account
+                <span onClick={() => {
+                  setCurrState("Sign Up");
+                  setIsDataSubmitted(false);
+                }}>
+                  Click here
+                </span>
+              </p>
+
           }
         </div>
       </form>

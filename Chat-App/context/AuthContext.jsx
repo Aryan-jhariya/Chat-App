@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
         setAuthUser(data.userData);
         connectSocket(data.userData);
 
-        axios.defaults.headers.common["token"] = data.token;
+        axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
         setToken(data.token);
         localStorage.setItem("token", data.token);
 
@@ -59,15 +59,18 @@ export const AuthProvider = ({ children }) => {
     setToken(null);
     setAuthUser(null);
 
-    axios.defaults.headers.common["token"] = null;
+    axios.defaults.headers.common["Authorization"] = null;
 
     socket?.disconnect();
     toast.success("Logged out successfully");
+    // Force full reload to ensure auth state and headers are reset
+    window.location.href = "/login";
   };
 
   // Update profile function to handle user profile updates
   const updateProfile = async (body) => {
     try {
+      console.log("Authorization header being sent:", axios.defaults.headers.common["Authorization"]);
       const { data } = await axios.put("/api/auth/update-profile", body);
       if (data.success) {
         setAuthUser(data.user);
@@ -98,10 +101,10 @@ export const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (token) {
-      axios.defaults.headers.common["token"] = token;
+      axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       checkAuth();
     }
-  }, []);
+  }, [token]);
 
   const value = {
     authUser,

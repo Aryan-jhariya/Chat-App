@@ -12,12 +12,16 @@ const App = () => {
     <div >
       <Toaster />
       <Routes>
-        {/* <Route path='/' element={authUser ? <Chat /> : <Navigate to="/login"/>}></Route>
-        <Route path='/login' element={!authUser ? <Login /> : <Navigate to = "/"/>}></Route>
-        <Route path='/profile' element={authUser ? <ProfileUpdate /> : <Navigate to = "/login"/>}></Route> */}
-        <Route path='/chat' element={<Chat />}></Route>
+
+        <Route path='/chat' element={authUser ? <Chat /> : <Navigate to="/login"/>}></Route>
+
+        <Route path='/login' element={!authUser ? <Login /> : <Navigate to = "/chat"/>}></Route>
+        
+        <Route path='/profile' element={authUser ? <ProfileUpdate /> : <Navigate to = "/login"/>}></Route>
+        
+        {/* <Route path='/chat' element={<Chat />}></Route>
         <Route path='/login' element={<Login />}></Route>
-        <Route path='/profile' element={<ProfileUpdate /> }></Route>
+        <Route path='/profile' element={<ProfileUpdate /> }></Route> */}
       </Routes>
     </div>
   )
