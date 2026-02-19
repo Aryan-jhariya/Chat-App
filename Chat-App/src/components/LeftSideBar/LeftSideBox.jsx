@@ -1,12 +1,28 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import './LeftSideBox.css'
-import assets, { userDummyData } from '../../assets/assets.js'
+import assets from '../../assets/assets.js'
 import { useNavigate } from 'react-router-dom';
 import { Authcontext } from '../../../context/AuthContext.jsx'
+import { ChatContext } from '../../../context/ChatContext.jsx';
 
-const LeftSideBox = ({ selectedUser, setSelectedUser }) => {
+const LeftSideBox = () => {
+
+    const chatCtx = useContext(ChatContext) || {};
+    const { getUsers, users = [], selectedUser, setSelectedUser, unseenMessages = {}, setUnseenMessages } = chatCtx;
+
+    const authCtx = useContext(Authcontext) || {};
+    const { logout, onlineUsers = [] } = authCtx;
+
+    const [input, setInput] = useState("")
+    
     const navigate = useNavigate();
-    const { logout } = useContext(Authcontext)
+
+    const filteredUsers = users.filter((user) => !input || (user.fullName || '').toLowerCase().includes(input.toLowerCase()));
+
+    useEffect(()=>{
+        if (getUsers) getUsers();
+    },[onlineUsers])
+    
     return (
         <div className={`ls ${selectedUser ? "hide-mobile" : ""}`}>
 
@@ -26,29 +42,34 @@ const LeftSideBox = ({ selectedUser, setSelectedUser }) => {
 
                 <div className="ls-search">
                     <img src={assets.search_icon} alt="search" />
-                    <input type="text" placeholder="Search here.." />
+                    <input value={input} onChange={(e) => setInput(e.target.value)} type="text" placeholder="Search here.." />
                 </div>
             </div>
 
             {/* CHAT LIST */}
             <div className="ls-list">
-                {userDummyData.map((user, index) => (
+                {filteredUsers.map((user, index) => (
                     <div
                         className={`friends ${selectedUser?._id === user._id ? "active-friend" : ""}`}
-                        onClick={() => setSelectedUser(user)}
+                        onClick={() => {
+                            setSelectedUser(user);
+                            if (typeof setUnseenMessages === 'function') {
+                                setUnseenMessages(prev => ({ ...prev, [user._id]: 0 }));
+                            }
+                        }}
                         key={index}
                     >
 
                         <img src={user?.profilePic || assets.avatar_icon} alt="profile" />
                         <div>
-                            <p>{user.fullName}</p>
+                            <p>{user.fullName || user.userName || user.name || 'Unknown'}</p>
                             {
-                                index < 3
+                                onlineUsers.includes(user._id)
                                     ? <span className='online'>Online</span>
                                     : <span>Offline</span>
                             }
                         </div>
-                        {index > 2 && <p>{index}</p>}
+                        {unseenMessages[user._id] > 0 && <p>{unseenMessages[user._id]}</p>}
                     </div>
                 ))}
             </div>

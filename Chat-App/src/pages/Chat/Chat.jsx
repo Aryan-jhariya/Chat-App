@@ -1,17 +1,20 @@
-import React, { useState } from 'react'
+import { useContext } from 'react'
 import './Chat.css'
 import LeftSideBox from '../../components/LeftSideBar/LeftSideBox.jsx'
 import ChatBox from '../../components/ChatBox/ChatBox.jsx'
 import RightSideBar from '../../components/RightSideBar/RightSideBar.jsx'
+import { ChatContext } from '../../../context/ChatContext.jsx'
 
 const Chat = () => {
-  const [selectedUser, setSelectedUSer] = useState(false)
+
+  const {selectedUser} = useContext(ChatContext)
+
   return (
     <div className='chat'>
        <div className={`chat-Container ${selectedUser ? 'three-col' : 'two-col'}`}>
-        <LeftSideBox selectedUser={selectedUser} setSelectedUser={setSelectedUSer}/>
-        <ChatBox selectedUser={selectedUser} setSelectedUser={setSelectedUSer}/>
-        <RightSideBar selectedUser={selectedUser} setSelectedUser={setSelectedUSer}/>
+        <LeftSideBox />
+        <ChatBox />
+        <RightSideBar />
       </div>
     </div>
   )

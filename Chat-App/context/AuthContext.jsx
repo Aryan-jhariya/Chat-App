@@ -93,8 +93,14 @@ export const AuthProvider = ({ children }) => {
 
     newSocket.connect();
     setSocket(newSocket);
+    console.log("Socket connecting for user:", userData._id, "socket id:", newSocket.id);
+
+    newSocket.on("connect", () => {
+      console.log("Socket connected:", newSocket.id, "for user:", userData._id);
+    });
 
     newSocket.on("getOnlineUsers", (userIds) => {
+      console.log("Received getOnlineUsers:", userIds);
       setOnlineUser(userIds);
     });
   };
@@ -109,6 +115,8 @@ export const AuthProvider = ({ children }) => {
   const value = {
     authUser,
     onlineUser,
+    // backward-compatible alias used across components
+    onlineUsers: onlineUser,
     socket,
     login,
     logout,
