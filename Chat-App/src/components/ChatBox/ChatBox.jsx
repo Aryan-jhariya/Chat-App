@@ -51,7 +51,8 @@ const ChatBox = () => {
       {/* ----HEADER--- */}
       <div className="chat-user">
         <img src={selectedUser.profilePic || assets.avatar_icon} alt="" />
-        <p>{selectedUser.userName} {onlineUser.includes(selectedUser._id)}<img className='dot' src={assets.green_dot} alt="" /></p>
+        <p>{selectedUser.userName} 
+          {onlineUser.includes(selectedUser._id) && <span className='w-2 h-2 rounded-full bg-green-500'></span>} </p>
         <img onClick={() => setSelectedUser(null)} src={assets.help_icon} className='help' alt="" />
       </div>
 

@@ -7,13 +7,14 @@ import { useContext } from 'react'
 import { Authcontext } from '../context/AuthContext.jsx'
 
 const App = () => {
-  const {authUser} = useContext(Authcontext)
+  const { authUser, isLoading } = useContext(Authcontext)
+  if (isLoading) return <div />
   return (
     <div >
       <Toaster />
       <Routes>
 
-        <Route path='/' element={authUser ? <Chat /> : <Navigate to="/login"/>}></Route>
+        <Route path='/' element={<Navigate to="/login"/>}></Route>
 
         <Route path='/chat' element={authUser ? <Chat /> : <Navigate to="/login"/>}></Route>
 

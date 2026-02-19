@@ -15,6 +15,7 @@ export const AuthProvider = ({ children }) => {
 
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [authUser, setAuthUser] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const [onlineUser, setOnlineUser] = useState([]);
   const [socket, setSocket] = useState(null);
 
@@ -26,8 +27,11 @@ export const AuthProvider = ({ children }) => {
         setAuthUser(data.user);
         connectSocket(data.user);
       }
+      // even if not successful, stop loading so routes can decide
+      setIsLoading(false);
     } catch (error) {
       toast.error(error.message);
+      setIsLoading(false);
     }
   };
 
@@ -43,6 +47,7 @@ export const AuthProvider = ({ children }) => {
         axios.defaults.headers.common["Authorization"] = `Bearer ${data.token}`;
         setToken(data.token);
         localStorage.setItem("token", data.token);
+        setIsLoading(false);
 
         toast.success(data.message);
       } else {
@@ -50,6 +55,7 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (error) {
       toast.error(error.message);
+      setIsLoading(false);
     }
   };
 
@@ -109,11 +115,15 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
       checkAuth();
+    } else {
+      // no token => not authenticated, mark loading finished
+      setIsLoading(false);
     }
   }, [token]);
 
   const value = {
     authUser,
+    isLoading,
     onlineUser,
     // backward-compatible alias used across components
     onlineUsers: onlineUser,
