@@ -1,57 +1,174 @@
-.rs{
+/* ============================= */
+/* RIGHT SIDEBAR CONTAINER */
+/* ============================= */
+
+.rs {
     color: white;
-    background: #001030;
-    position: relative;
-    height: 75vh;
-    overflow-y: scroll;
-}
-.rs-profile{
-    padding-top: 60px;
-    text-align: center;
-    max-width: 70%;
-    margin: auto;
-}
-
-.rs-profile img{
-    width: 80px;
-    aspect-ratio: 1/1;
-    border-radius: 50%;
-}
-
-.rs-profile h3{
-    font-size: 18px;
-    font-weight: 400;
+    background: linear-gradient(180deg, #001030, #000c24);
+    height: 100%;                 /* Important: match parent height */
+    width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
-    margin: 5px 0px ;
-
+    flex-direction: column;
+    overflow-y: auto;
+    padding-bottom: 10px;
 }
 
-.rs-profile p{
-    font-size: 10px;
-    opacity: 80%;
-    font-weight: 300;
+/* Custom Scrollbar */
+.rs::-webkit-scrollbar {
+    width: 6px;
 }
 
-.rs hr{
-    border-color: #ffffff50 ;
-    margin: 15px 0px;
+.rs::-webkit-scrollbar-thumb {
+    background: #077eff;
+    border-radius: 10px;
+}
+
+.rs::-webkit-scrollbar-track {
+    background: transparent;
 }
 
 
-.rs button{
+/* ============================= */
+/* PROFILE SECTION */
+/* ============================= */
+
+.rs-profile {
+    padding: 50px 20px 20px 20px;
+    text-align: center;
+}
+
+.profile-img-wrapper {
+    position: relative;
+    width: 90px;
+    margin: 0 auto;
+}
+
+.profile-img-wrapper img {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #077eff;
+}
+
+/* Online indicator */
+.online-indicator {
     position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translate(-50%);
+    bottom: 6px;
+    right: 6px;
+    width: 14px;
+    height: 14px;
+    background: #22c55e;
+    border-radius: 50%;
+    border: 2px solid #001030;
+}
+
+/* Username */
+.rs-profile h3 {
+    font-size: 18px;
+    margin-top: 12px;
+    font-weight: 500;
+}
+
+/* Bio */
+.rs-profile p {
+    font-size: 12px;
+    opacity: 0.7;
+    margin-top: 5px;
+}
+
+
+/* ============================= */
+/* DIVIDER */
+/* ============================= */
+
+.rs hr {
+    border: none;
+    height: 1px;
+    background: #ffffff30;
+    margin: 20px 0;
+}
+
+
+/* ============================= */
+/* MEDIA SECTION */
+/* ============================= */
+
+.rs-media {
+    padding: 0 20px;
+}
+
+.rs-media h4 {
+    font-size: 14px;
+    margin-bottom: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+/* Media grid */
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    max-height: 250px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+/* Individual media item */
+.media-item {
+    cursor: pointer;
+    border-radius: 10px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.media-item img {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    display: block;
+}
+
+/* Hover effect */
+.media-item:hover {
+    transform: scale(1.05);
+}
+
+/* No media text */
+.no-media {
+    font-size: 12px;
+    opacity: 0.6;
+}
+
+
+/* ============================= */
+/* LOGOUT BUTTON */
+/* ============================= */
+
+.logout-wrapper {
+    margin-top: auto;       /* Pushes button to bottom */
+    padding: 20px;
+    text-align: center;
+}
+
+.rs button {
     background: #077eff;
     color: white;
     border: none;
-    font-size: 12px;
-    font-weight: 300;
-    padding: 10px 65px;
-    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 12px 60px;
+    border-radius: 30px;
     cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.rs button:hover {
+    background: #005bd3;
+    transform: translateY(-2px);
+}
+
+.rs button:active {
+    transform: translateY(0);
 }

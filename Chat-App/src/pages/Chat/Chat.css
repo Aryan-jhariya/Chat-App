@@ -1,23 +1,65 @@
-.chat{
+/* ============================= */
+/* OUTER BACKGROUND */
+/* ============================= */
+
+.chat {
     min-height: 100vh;
     background: linear-gradient(#596AFF, #383699);
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.chat-Container{
+
+/* ============================= */
+/* MAIN CHAT CONTAINER */
+/* ============================= */
+
+.chat-Container {
     width: 95%;
-    height: 75vh;
-    max-width: 10000px;
-    background-color: aliceblue;
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    height: 95vh;             /* more stable than 75vh */
+    max-width: 1400px;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;         /* VERY IMPORTANT */
+    display: flex;            /* SWITCHED TO FLEX */
 }
 
-.two-col {
-  grid-template-columns: 1fr 2fr;
+
+/* ============================= */
+/* COLUMN WIDTHS */
+/* ============================= */
+
+/* Left Sidebar */
+.chat-Container > :first-child {
+    width: 25%;
+    min-width: 250px;
 }
 
-.three-col {
-  grid-template-columns: 1fr 1.5fr 1fr;
+/* ChatBox (center) */
+.chat-Container > :nth-child(2) {
+    flex: 1;
+}
+
+/* Right Sidebar */
+.chat-Container > :last-child {
+    width: 25%;
+    min-width: 280px;
+}
+
+
+/* ============================= */
+/* TWO COLUMN MODE */
+/* ============================= */
+
+.two-col > :last-child {
+    display: none;
+}
+
+/* ============================= */
+/* THREE COLUMN MODE */
+/* ============================= */
+
+.three-col > :last-child {
+    display: block;
 }
