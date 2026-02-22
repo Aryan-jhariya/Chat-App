@@ -86,7 +86,7 @@ const ChatBox = () => {
                   ? authUser?.profilePic || assets.avatar_icon
                   : selectedUser?.profilePic || assets.avatar_icon
               }
-                alt="" className='w-7 rounded-full' />
+                alt="" className='w-8 h-8 rounded-full object-cover' />
               <p className='text-gray-500'>{formatMessageTime(msg.createdAt)}</p>
             </div>
           </div>
@@ -99,7 +99,7 @@ const ChatBox = () => {
         <input onChange={(e) => setInput(e.target.value)} value={input} onKeyDown={(e) => e.key === "Enter" ? handleSendMessage(e) : null} type="text" placeholder='Send a message' />
         <input onChange={handleSendImage} type="file" id='image' accept='image/png, image/jpeg' hidden />
         <label htmlFor="image">
-          <img src={assets.gallery_icon} alt="" />
+          <img src={assets.gallery_icon} alt="" className='gallery'/>
         </label>
         <img onClick={handleSendMessage} src={assets.send_button} alt="" />
       </div>

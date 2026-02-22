@@ -67,7 +67,6 @@ const Login = () => {
                   Click here
                 </span>
               </p>
-
           }
         </div>
       </form>

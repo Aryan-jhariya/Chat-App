@@ -1,16 +1,17 @@
-/* ============================= */
 /* RIGHT SIDEBAR CONTAINER */
-/* ============================= */
-
 .rs {
     color: white;
-    background: linear-gradient(180deg, #001030, #000c24);
-    height: 100%;                 /* Important: match parent height */
+    background: rgba(0, 16, 48, 0.85);
+    backdrop-filter: blur(18px);
+
+    height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
     overflow-y: auto;
     padding-bottom: 10px;
+
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 /* Custom Scrollbar */
@@ -19,7 +20,7 @@
 }
 
 .rs::-webkit-scrollbar-thumb {
-    background: #077eff;
+    background: linear-gradient(#077eff, #00c6ff);
     border-radius: 10px;
 }
 
@@ -39,16 +40,16 @@
 
 .profile-img-wrapper {
     position: relative;
-    width: 90px;
+    width: 100px;
     margin: 0 auto;
 }
 
 .profile-img-wrapper img {
-    width: 90px;
-    height: 90px;
+    width: 100px;
+    height: 100px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #077eff;
+    border: 3px solid #00c6ff;
 }
 
 /* Online indicator */
@@ -66,7 +67,7 @@
 /* Username */
 .rs-profile h3 {
     font-size: 18px;
-    margin-top: 12px;
+    margin-top: 14px;
     font-weight: 500;
 }
 
@@ -74,26 +75,18 @@
 .rs-profile p {
     font-size: 12px;
     opacity: 0.7;
-    margin-top: 5px;
+    margin-top: 6px;
 }
 
-
-/* ============================= */
 /* DIVIDER */
-/* ============================= */
-
 .rs hr {
     border: none;
     height: 1px;
-    background: #ffffff30;
+    background: rgba(255, 255, 255, 0.1);
     margin: 20px 0;
 }
 
-
-/* ============================= */
 /* MEDIA SECTION */
-/* ============================= */
-
 .rs-media {
     padding: 0 20px;
 }
@@ -118,9 +111,9 @@
 /* Individual media item */
 .media-item {
     cursor: pointer;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    transition: transform 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .media-item img {
@@ -133,6 +126,7 @@
 /* Hover effect */
 .media-item:hover {
     transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 212, 255, 0.3);
 }
 
 /* No media text */
@@ -141,19 +135,15 @@
     opacity: 0.6;
 }
 
-
-/* ============================= */
 /* LOGOUT BUTTON */
-/* ============================= */
-
 .logout-wrapper {
-    margin-top: auto;       /* Pushes button to bottom */
+    margin-top: auto;
     padding: 20px;
     text-align: center;
 }
 
 .rs button {
-    background: #077eff;
+    background: linear-gradient(135deg, #077eff, #00c6ff);
     color: white;
     border: none;
     font-size: 13px;
@@ -161,12 +151,12 @@
     padding: 12px 60px;
     border-radius: 30px;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.3s ease;
 }
 
 .rs button:hover {
-    background: #005bd3;
     transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 212, 255, 0.4);
 }
 
 .rs button:active {
